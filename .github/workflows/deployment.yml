@@ -20,11 +20,11 @@ jobs:
 
       - name: Deploy via SSH
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@YOUR_EC2_IP << 'EOF'
-            cd /home/ubuntu/your-app
+          ssh -o StrictHostKeyChecking=no ubuntu@54.172.25.151 << 'EOF'
+            cd /home/ubuntu/ci-cd-node-app
             git pull origin main
-            docker build -t your-app-image .
+            docker build -t ci-cd-node-app .
             docker stop app || true
             docker rm app || true
-            docker run -d --name app -p 80:3000 your-app-image
+            docker run -d --name app -p 80:3000 ci-cd-node-app
           EOF
