@@ -24,6 +24,7 @@ jobs:
           ssh -o StrictHostKeyChecking=no ubuntu@54.172.25.151 << 'EOF'
             cd /home/ubuntu/ci-cd-node-app
             git pull origin main
+            docker stop $(docker ps -q)
             docker build -t ci-cd-node-app .
             docker stop app || true
             docker rm app || true
